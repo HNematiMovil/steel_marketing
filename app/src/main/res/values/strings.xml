@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">بازاریابی</string>
+
+
+    <string-array name="products">
+
+        <item>اجاق  چهار شعله خطی</item>
+        <item>اجاق چهار شعله طرح apw</item>
+        <item>اجاق چهار شعله فر دار</item>
+        <item>اجاق دو  شعله خطی</item>
+        <item>اجاق دو شعله طرح apw</item>
+        <item>اجاق سه  شعله خطی</item>
+        <item>اجاق شش شعله  طرح apw</item>
+        <item>اجاق شش شعله فر دار</item>
+        <item>آب سرد کن تک شیر</item>
+        <item>آب سرد کن دو شیر</item>
+        <item>آب سرد کن سه شیر</item>
+        <item>آب گوجه گیر</item>
+        <item>آبغوره گیر</item>
+        <item>آبلیموگیر </item>
+        <item>برگر زغالی</item>
+        <item>تاپینگ</item>
+        <item>ترولی آبچکان</item>
+        <item>ترولی پلاستیکی</item>
+        <item>ترولی حمل غذا </item>
+        <item>تنور فلزی</item>
+        <item>تنور گلی</item>
+        <item>جاسیخی</item>
+        <item>جوجه گردان 2 سیخ</item>
+        <item>جوجه گردان 4سیخ</item>
+        <item>جوجه گردان 6 سیخ</item>
+        <item>چرخ گوشت 32</item>
+        <item>چرخ گوشت 42</item>
+        <item>چرخ گوشت الکتروکار رومیزی</item>
+        <item>دستگاه پخت بلدرچین </item>
+        <item>دستگاه کباب ترکی تک سیخ</item>
+        <item>دستگاه کباب ترکی دو سیخ</item>
+        <item>دم کن برنج تک قلو</item>
+        <item>دم کن برنج دو قلو</item>
+        <item>دیگ چلوپزی</item>
+        <item>دیگ خورشت پزی صنعتی</item>
+        <item>سرخ کن تک لگن</item>
+        <item>سرخ کن دو لگن</item>
+        <item>سینک وان</item>
+        <item>شیر سرد کن</item>
+        <item>فر اغذیه</item>
+        <item>فر پیتزا 4 بشقاب</item>
+        <item>فر دیزی</item>
+        <item>فر ساندویچ سه کاره</item>
+        <item>فرساندویچی سه کاره</item>
+        <item>فریزر صندوقی 4 در</item>
+        <item>فریزر صندوقی 6 در</item>
+        <item>فریزر میز کاری</item>
+        <item>کابینت آبچکان</item>
+        <item>کابینت دیواری</item>
+        <item>کابینت زمینی</item>
+        <item>کانتر قاشق چنگال</item>
+        <item>کانتر گرم </item>
+        <item>کانتر گرم سیار</item>
+        <item>کباب پز استیل هر متر</item>
+        <item>کباب پز آهن هر متر</item>
+        <item>کباب پز تابشی 20 سیخ</item>
+        <item>کباب پز تابشی 30 سیخ</item>
+        <item>کباب پز تابشی 40 سیخ</item>
+        <item>کته پز پایه استیل هر شعله</item>
+        <item>کته پز پایه آهن هر شعله</item>
+        <item>گاری حمل دیگ</item>
+        <item>گرمخانه تک درب (50 پرسی)</item>
+        <item>گرمخانه دو درب (100 پرسی)</item>
+        <item>گرمخانه سیار ( بیمارستانی )</item>
+        <item>گریل 60 ترکیبی</item>
+        <item>گریل 60 ذغالی</item>
+        <item>گریل 60 روغن</item>
+        <item>گریل 90 ترکیبی</item>
+        <item>گریل 90 ذغالی</item>
+        <item>گریل 90 روغن</item>
+        <item>میز تخته کار</item>
+        <item>میز کار </item>
+        <item>هود دیواری بدون فیلتر</item>
+        <item>هود دیواری فیلتر دار</item>
+        <item>هود مرکزی فیلتر دار</item>
+        <item>یخچال  1.5 متری پشت بسته 4 در</item>
+        <item>یخچال  2متری پشت بسته 6 در</item>
+        <item>یخچال 60 سانتی نوشابه</item>
+        <item>یخچال کبابی 1.5 متری</item>
+
+    </string-array>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+
+    <string name="HIDE">بستن</string>
+
+</resources>

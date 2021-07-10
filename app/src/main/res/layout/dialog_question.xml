@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:padding="10dp"
+    >
+
+    <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+        android:id="@+id/tvDialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="this is "
+        android:gravity="center"
+        />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" android:gravity="center">
+    <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+        android:id="@+id/btnYes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+        android:text="بله"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        />
+    <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+        android:id="@+id/btnNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="خیر"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_margin="10dp"
+        />
+</LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

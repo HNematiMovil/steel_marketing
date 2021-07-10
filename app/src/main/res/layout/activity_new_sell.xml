@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="شماره مشتری"
+                android:textSize="18sp"
+                />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.EditTextPersian
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:inputType="phone"
+                android:maxLines="1"
+
+
+                />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="نام مشتری"
+                android:textSize="18sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+                    android:id="@+id/btnWoman"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:text="خانم"
+                    android:textSize="18sp" />
+
+                <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+                    android:id="@+id/btnMan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/green_50"
+                    android:text="آقا"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.EditTextPersian
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:inputType="text"
+                android:maxLines="1" />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="محصولات فروخته شده"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/spacing_large" />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/llProducts"
+               android:orientation="vertical"
+               />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/spacing_large" />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+                android:id="@+id/btnAddProductPrice"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style1"
+                android:text="افزودن" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_large" />
+
+
+
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:id="@+id/tvPricePersian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+
+
+                />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/spacing_large" />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="تاریخ/زمان"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ir.hadinemati.steelmarketing.Views.Widgets.EditTextPersian
+                    android:id="@+id/etTime"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="5"
+                    android:maxLines="1"
+                    android:enabled="false"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ibChooseDate"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_menu_my_calendar" />
+            </LinearLayout>
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+                android:id="@+id/btnAddOrder"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@color/green_300"
+                android:text="ثبت فروش جدید "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

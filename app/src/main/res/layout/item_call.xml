@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/underline"
+    android:backgroundTint="@color/grey_3"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+            android:id="@+id/tvName"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="نام" />
+        <ir.hadinemati.steelmarketing.Views.Widgets.FontAwesomeIcon
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&#xf2bd;"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+            android:id="@+id/tvProduct"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="محصول" />
+        <ir.hadinemati.steelmarketing.Views.Widgets.FontAwesomeIcon
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&#xf2bd;"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+            android:id="@+id/tvPhoneNumber"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="شماره" />
+        <ir.hadinemati.steelmarketing.Views.Widgets.FontAwesomeIcon
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&#xf10b;"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+            android:id="@+id/tvPersianDate"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="تاریخ" />
+        <ir.hadinemati.steelmarketing.Views.Widgets.FontAwesomeIcon
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&#xf073;"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+
+
+    <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+        android:id="@+id/btnShowInformation"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="مشاهده تماس های بازگشتی"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/underline"
+        android:backgroundTint="@color/green_100" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

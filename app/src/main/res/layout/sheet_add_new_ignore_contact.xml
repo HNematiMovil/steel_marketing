@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+            android:id="@+id/SheetAddIgnoreContactBtnChooseFromContacts"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@color/green_50"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="مخاطبین" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="شماره" />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.EditTextPersian
+                android:id="@+id/SheetAddIgnoreContactETPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+
+                />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="نام (اختیاری)"
+                android:layout_marginTop="10dp"
+                />
+
+            <ir.hadinemati.steelmarketing.Views.Widgets.EditTextPersian
+                android:id="@+id/SheetAddIgnoreContactETName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <ir.hadinemati.steelmarketing.Views.Widgets.ButtonPersian
+        android:id="@+id/SheetAddIgnoreContactBtnChooseSaveContact"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ذخیره" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
