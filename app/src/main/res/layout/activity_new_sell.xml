@@ -142,7 +142,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="5"
                     android:maxLines="1"
-                    android:enabled="false"
+
                     />
 
                 <ImageButton

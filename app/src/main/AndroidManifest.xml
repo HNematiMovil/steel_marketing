@@ -36,6 +36,8 @@
         <activity android:name=".Views.AccountingView" />
         <activity android:name=".Views.PictureManagementView" />
         <activity android:name=".Views.NewSellView" />
+        <activity android:name=".Views.UploadWebView" />
+        <activity android:name=".Views.CallBackView" />
 
         <activity android:name=".Views.MainActivity">
             <intent-filter>

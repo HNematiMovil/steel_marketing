@@ -33,7 +33,9 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        >
 
         <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
             android:layout_width="match_parent"
@@ -50,7 +52,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="فیلتر" />
+                android:text="فیلتر"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                />
 
             <ir.hadinemati.steelmarketing.Views.Widgets.TextViewPersian
                 android:id="@+id/tvFilteredProduct"
