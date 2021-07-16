@@ -71,6 +71,8 @@ public class CallsViewPresenter implements ICallsListPresenter {
         // get all uuids
         List<String> uuids = new ArrayList<>();
         HashMap<String, String> params = new HashMap<>();
+        params.put("username","cccc");
+        Log.d(TAG, "SyncCalls: " + Constants.getPostUrl("get_all_call_uuids"));
         Http http = new Http(Constants.getPostUrl("get_all_call_uuids"), new Http.IHTTPResult() {
             @Override
             public void OnStarted() {
@@ -85,6 +87,30 @@ public class CallsViewPresenter implements ICallsListPresenter {
                     JSONArray ja = new JSONArray(Result);
                     for (int i = 0; i < ja.length(); i++)
                         uuids.add(((JSONObject) ja.get(i)).getString("uuid"));
+
+
+
+
+                    if (uuids.size() == 0) {
+                        Toast.makeText(context, "خطا در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // get db records
+                    List<PotentialCustomerPhoneCall> potentialCustomerPhoneCalls = db.potentialCustomerPhoneCallDao().getAll();
+
+                    for (int index = 0; index < potentialCustomerPhoneCalls.size(); index++) {
+                        PotentialCustomerPhoneCall _call = potentialCustomerPhoneCalls.get(index);
+                        if (uuids.contains(_call.getUUID())) {
+                            callsListView.SyncUpdated(index);
+                            continue;
+                        }
+
+                        SyncSingleCall(_call,index);
+
+                    }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -108,24 +134,6 @@ public class CallsViewPresenter implements ICallsListPresenter {
 
         http.BufferedPost(params);
 
-        if (uuids.size() == 0) {
-            Toast.makeText(context, "خطا در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // get db records
-        List<PotentialCustomerPhoneCall> potentialCustomerPhoneCalls = db.potentialCustomerPhoneCallDao().getAll();
-
-        for (int index = 0; index < potentialCustomerPhoneCalls.size(); index++) {
-            PotentialCustomerPhoneCall _call = potentialCustomerPhoneCalls.get(index);
-            if (uuids.contains(_call.getUUID())) {
-                callsListView.SyncUpdated(index);
-                continue;
-            }
-
-            SyncSingleCall(_call,index);
-
-        }
 
 
     }
@@ -140,6 +148,9 @@ public class CallsViewPresenter implements ICallsListPresenter {
             params.put("persian_date", _call.getPersianDate());
             params.put("phone_number",_call.getPhoneNumber());
             params.put("uuid",_call.getUUID());
+
+            Log.d(TAG, "SyncSingleCall: " + params.toString());
+
             Http http = new Http(Constants.getPostUrl("add_new_potential_customer_call"), new Http.IHTTPResult() {
                 @Override
                 public void OnStarted() {
@@ -149,6 +160,7 @@ public class CallsViewPresenter implements ICallsListPresenter {
                 @Override
                 public void OnSuccess(String Result) {
                     callsListView.SyncUpdated(childIndex);
+                    Log.d(TAG, "OnSuccess: "  );
                 }
 
                 @Override

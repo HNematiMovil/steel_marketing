@@ -20,12 +20,12 @@ import ir.hadinemati.steelmarketing.R;
 public class CallsListRecyclerAdapter extends RecyclerView.Adapter<CallsListRecyclerAdapter.CallsViewHolder> {
 
 
-    List<PotentialCustomerPhoneCall> _list ;
-    Context context ;
+    List<PotentialCustomerPhoneCall> _list;
+    Context context;
     ICallsListPresenter callsListPresenter;
     LayoutInflater _inflater;
 
-    public CallsListRecyclerAdapter(List<PotentialCustomerPhoneCall> _list, Context context , ICallsListPresenter callsListPresenter) {
+    public CallsListRecyclerAdapter(List<PotentialCustomerPhoneCall> _list, Context context, ICallsListPresenter callsListPresenter) {
         this._list = _list;
         this.context = context;
         this.callsListPresenter = callsListPresenter;
@@ -35,17 +35,18 @@ public class CallsListRecyclerAdapter extends RecyclerView.Adapter<CallsListRecy
     @NonNull
     @Override
     public CallsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = _inflater.inflate(R.layout.item_call,parent,false);
+        View v = _inflater.inflate(R.layout.item_call, parent, false);
         return new CallsViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CallsViewHolder holder, int position) {
         PotentialCustomerPhoneCall _call = _list.get(position);
-        holder.tvName.setText(_call.Gender +" " + _call.Username);
-        holder.tvDate.setText("تاریخ " +_call.PersianDate);
-        holder.tvProduct.setText("محصول " + _call.Product);
-        holder.tvPhone.setText("شماره "+_call.PhoneNumber);
+        String Gender = _call.Gender + (_call.Gender.equalsIgnoreCase("آقا") ? "ی" : "") ;
+        holder.tvName.setText( Gender + " " + _call.Username);
+        holder.tvDate.setText(_call.PersianDate);
+        holder.tvProduct.setText(_call.Product);
+        holder.tvPhone.setText(_call.PhoneNumber);
         holder.btnShowinformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,9 +61,9 @@ public class CallsListRecyclerAdapter extends RecyclerView.Adapter<CallsListRecy
         return _list.size();
     }
 
-    public class CallsViewHolder extends RecyclerView.ViewHolder{
+    public class CallsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvName, tvProduct,tvDate , tvPhone;
+        TextView tvName, tvProduct, tvDate, tvPhone;
         Button btnShowinformation;
 
         public CallsViewHolder(@NonNull View itemView) {

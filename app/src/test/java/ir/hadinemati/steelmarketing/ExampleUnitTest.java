@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import ir.hadinemati.steelmarketing.Lib.Encryption;
 import ir.hadinemati.steelmarketing.Lib.Http;
 import ir.hadinemati.steelmarketing.Lib.Num2CharConverter;
+import ir.hadinemati.steelmarketing.Lib.StringSplitHelpera;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
@@ -19,6 +20,8 @@ import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -56,7 +59,7 @@ public class ExampleUnitTest {
 
     @Test
     public void EncDecTest(){
-        String original = "this is a test of + and - signs";
+        String original = "data=hadi";
         String Enc = Encryption.Encrypt(original);
         String Dec = Encryption.Decrypt(Enc);
 
@@ -64,5 +67,14 @@ public class ExampleUnitTest {
         System.out.println(Dec);
 
         assertEquals(Dec,original);
+    }
+
+    @Test
+    public void splittest(){
+        String input = "this is a long splittable text that is asdadsbjkasdkj haskdjhjkasdh kasjdhkajsdnasdnmasndmasdnmasdnmansdkjqhweajasdjhajsdhasjdhjasdasqweqweqasd";
+        List<String> parts =  StringSplitHelpera.SplitString(input , 20);
+        System.out.println(parts.stream().collect(Collectors.joining("")));
+        assertEquals( input , parts.stream().collect(Collectors.joining("")) );
+
     }
 }

@@ -5,4 +5,6 @@ import java.util.List;
 public interface IPictureManagementView {
 
     void OnGenerateProductList(List<String> products);
+
+    void OnError(String message);
 }

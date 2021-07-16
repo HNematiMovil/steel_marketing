@@ -1,7 +1,10 @@
 package ir.hadinemati.steelmarketing.Presenters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +22,7 @@ import ir.hadinemati.steelmarketing.Views.Interfaces.ISellView;
 public class NewSellPresenter implements INewSellPresenter {
 
 
-    ISellView sellView ;
+    ISellView sellView;
     Context context;
 
     AppDatabase db;
@@ -38,22 +41,29 @@ public class NewSellPresenter implements INewSellPresenter {
     @Override
     public void addNewSell(String phoneNumber, String Gender, String Name, List<ProductPriceDO> productPriceDOS, String persianDateTime) {
 
-        if(phoneNumber.isEmpty() || Name.isEmpty() || productPriceDOS.size()==0 || persianDateTime.isEmpty())
-        {
+        if (phoneNumber.isEmpty() || Name.isEmpty() || productPriceDOS.size() == 0 || persianDateTime.isEmpty()) {
             sellView.OnFormCompletionError();
             return;
         }
 
-        HashMap<String,String> param = new HashMap<>();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("name",Name);
+        params.put("order",new Gson().toJson(productPriceDOS));
+        params.put("gender",Gender);
+        params.put("persian_date", persianDateTime);
+        params.put("phone_number",phoneNumber);
 
-        Http http = new Http("", new Http.IHTTPResult() {
+
+        Http http = new Http(Constants.getPostUrl("add_new_sell_order"), new Http.IHTTPResult() {
             @Override
             public void OnStarted() {
+
                 sellView.WaitToSync();
             }
 
             @Override
             public void OnSuccess(String Result) {
+                Log.d("new sell", "OnSuccess: ");
                 sellView.SyncDone();
             }
 
@@ -73,7 +83,7 @@ public class NewSellPresenter implements INewSellPresenter {
             }
         });
 
-        http.BufferedPost(param);
+        http.BufferedPost(params);
 
 
     }

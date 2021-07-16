@@ -38,13 +38,9 @@ public class Constants {
 
 
 
+    public final static String BaseUrl="https://marketing.steel-man.ir/api/";
 
-
-
-
-    public final static String BaseUrl="http://192.168.1.101/SteelManMarketing/api/";
-
-    public final static String keySecret = String.format("/key/%s/secret/%s/username/فرهاد",pKey,pSecret);
+    public final static String keySecret = String.format("/key/%s/secret/%s/username/Farhad",pKey,pSecret);
 
 
     public static String getPostUrl(String method){

@@ -15,8 +15,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -32,10 +34,12 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import ir.hadinemati.steelmarketing.BuildConfig;
 import ir.hadinemati.steelmarketing.Lib.Constants;
 import ir.hadinemati.steelmarketing.Lib.Http;
+import ir.hadinemati.steelmarketing.Lib.StringSplitHelpera;
 import ir.hadinemati.steelmarketing.R;
 
 public class Uploading extends IntentService {
@@ -76,7 +80,7 @@ public class Uploading extends IntentService {
             int importance = NotificationManager.IMPORTANCE_LOW;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            channel.setSound(null,null);
+            channel.setSound(null, null);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
@@ -84,15 +88,12 @@ public class Uploading extends IntentService {
         }
 
 
-
-
         notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.ic_notification_overlay)
                 .setContentTitle("title")
                 .setContentText("content")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-         notificationManager = NotificationManagerCompat.from(this);
-
+        notificationManager = NotificationManagerCompat.from(this);
 
 
         Bundle b = intent.getExtras();
@@ -145,11 +146,16 @@ public class Uploading extends IntentService {
             image = null;
             String decoded = Base64.encodeToString(BAOS.toByteArray(), Base64.DEFAULT);
             BAOS.reset();
+
+
+
             HashMap<String, String> param = new HashMap<>();
             param.put("imageData", decoded);
             param.put("category", category);
             param.put("filename", file.getName());
+//            param.put("index", String.valueOf(i));
             decoded = "";
+
 
             Http http = new Http(Constants.getPostUrl("upload_images"), new Http.IHTTPResult() {
                 @Override
@@ -170,6 +176,7 @@ public class Uploading extends IntentService {
                             .setProgress(0, 0, false);
                     notificationManager.notify(notificationId, notificationBuilder.build());
                     Log.i(TAG, "OnSuccess: " + Result);
+
                     NextUpload();
                 }
 
@@ -189,11 +196,14 @@ public class Uploading extends IntentService {
                 public void OnFailed(String message) {
                     notificationBuilder.setContentTitle("خطا در برقراری ارتباط").setContentText("لطفا اینترنت خود را بررسی نموده و مجددا تلاش نمایید").setProgress(0, 0, false);
                     notificationManager.notify(notificationId, notificationBuilder.build());
+
                 }
             });
+            Log.d(TAG + "http", "UploadSingleFile: " + http.PrepareDataToSend(param));
             http.BufferedPost(param);
             param = null;
             BAOS = null;
+
         } catch (JSONException e) {
 
         }

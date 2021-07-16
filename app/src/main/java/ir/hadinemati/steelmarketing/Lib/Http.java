@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 
@@ -23,8 +24,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPInputStream;
 
 public class Http {
+
+    final String TAG = "http";
 
     HttpURLConnection http;
 
@@ -51,13 +55,14 @@ public class Http {
                 e.printStackTrace();
             }
         }
-        outData.deleteCharAt(outData.length() - 1);
+        if(outData.length() > 0)
+            outData.deleteCharAt(outData.length() - 1);
         return outData.toString();
     }
 
-    public String PrepareDataToSend(HashMap<String, String> data,boolean doEncrypt){
+    public String PrepareDataToSend(HashMap<String, String> data, boolean doEncrypt) {
         try {
-            return "data="+URLEncoder.encode(Encryption.Encrypt(this.PrepareDataToSend(data)),"UTF-8")+"&enc=true";
+            return "data=" + URLEncoder.encode(Encryption.Encrypt(this.PrepareDataToSend(data)), "UTF-8") + "&enc=true";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -65,21 +70,26 @@ public class Http {
     }
 
 
-
-
     public void BufferedPost(HashMap<String, String> param) {
         (new Thread(new Runnable() {
             @Override
             public void run() {
                 httpResult.OnStarted();
-                byte[] data_bytes = PrepareDataToSend(param,true).getBytes();
+                byte[] data_bytes = PrepareDataToSend(param, true).getBytes();
                 try {
                     URL uri = new URL(url);
                     http = (HttpURLConnection) uri.openConnection();
+
+//                    http.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+//                    http.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+//                    http.setRequestProperty("Accept-Encoding", "identity");
+//                    http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//                    http.setRequestProperty("Content-Type", "multipart/form-data");
+//                    http.setRequestProperty("Connection", "keep-alive");
                     http.setRequestMethod("POST");
-                    http.setRequestProperty("Connection", "Keep-Alive");
-                    http.setConnectTimeout(50 * 1000);
-                    http.setReadTimeout(50 * 1000);
+
+                    http.setConnectTimeout(100 * 1000);
+                    http.setReadTimeout(100 * 1000);
                     http.setDoOutput(true);
                     http.setDoInput(true);
 
@@ -101,7 +111,7 @@ public class Http {
                         byteBuffer.get(buffer, 0, bufferSize);
                         bytesRead += bufferSize;
                         os.write(buffer);
-                        httpResult.OnProgress(bytesRead*100 / length);
+                        httpResult.OnProgress(bytesRead * 100 / length);
 
                     } while (bytesRead < length);
                     // reset memory
@@ -111,18 +121,48 @@ public class Http {
                     os.flush();
                     os.close();
 
+                    if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
 
-                    InputStream in = new BufferedInputStream(http.getInputStream());
-                    String Result = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines().collect(Collectors.joining(""));
-                    in = null;
-                    httpResult.OnSuccess(Result);
-                    Result = null;
+                        Log.d(TAG, "run: " + http.getContentEncoding());
+
+                        Reader reader = null;
+                        if (http.getContentEncoding() != null) {
+                            if (http.getContentEncoding().equalsIgnoreCase("gzip")) {
+                                reader = new InputStreamReader(new GZIPInputStream(http.getInputStream()));
+                            } else {
+                                reader = new InputStreamReader(http.getInputStream());
+                            }
+                        } else {
+                            reader = new InputStreamReader(http.getInputStream());
+                        }
+
+                        StringBuilder Result = new StringBuilder();
+
+                        while (true) {
+                            int ch = reader.read();
+                            if (ch == -1)
+                                break;
+                            Result.append((char) ch);
+                        }
+                        Log.d(TAG, "run: success" + Result.toString());
+                        if(!Result.toString().equalsIgnoreCase(""))
+                           httpResult.OnSuccess(Encryption.Decrypt(Result.toString()));
+                        else
+                            httpResult.OnSuccess("");
+
+
+                    } else {
+                        Log.d("http", "run: refused " + http.getResponseCode() + http.getResponseMessage());
+                        httpResult.OnFailed("Connection refused"+ http.getResponseMessage() + http.getResponseCode() );
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.i("http", "run: " + e.getMessage());
+                    Log.i("http", "run: " + e.getMessage(), e.getCause());
                     httpResult.OnFailed(e.getMessage());
+                } finally {
+                   // http.disconnect();
                 }
-
 
 
             }
@@ -134,8 +174,11 @@ public class Http {
 
     public interface IHTTPResult {
         void OnStarted();
+
         void OnSuccess(String Result);
+
         void OnProgress(int percent);
+
         void OnTimeOut();
 
         void OnFailed(String message);

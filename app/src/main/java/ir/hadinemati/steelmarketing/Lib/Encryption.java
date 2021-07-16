@@ -1,6 +1,7 @@
 package ir.hadinemati.steelmarketing.Lib;
 
 import android.util.Base64;
+import android.util.Log;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -37,14 +38,14 @@ public static String Encrypt(String data){
             Cipher cipher = Cipher.getInstance(CIPHER_NAME);
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec);
 
-
             String[] dataParts = data.split(":");
 
-            byte[] encryptedData = cipher.doFinal(Base64.decode(dataParts[0],Base64.DEFAULT));
+            byte[] decryptedData = cipher.doFinal(Base64.decode(dataParts[0],Base64.DEFAULT));
 
-            return new String(encryptedData);
+            return new String(decryptedData);
 
         } catch (Exception ex) {
+            Log.d("http dec", "Decrypt: " + ex.getMessage() + ex.getCause());
             throw new RuntimeException(ex);
         }
     }

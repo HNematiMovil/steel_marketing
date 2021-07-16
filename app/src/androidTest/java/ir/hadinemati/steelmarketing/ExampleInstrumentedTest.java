@@ -10,10 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import ir.hadinemati.steelmarketing.Lib.Constants;
 import ir.hadinemati.steelmarketing.Lib.Encryption;
 import ir.hadinemati.steelmarketing.Lib.Http;
+import ir.hadinemati.steelmarketing.Lib.StringSplitHelpera;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +37,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void EncDecTest(){
-        String original = "this is a test of + and - signs22";
+        String original = "data=hadi";
         String Enc = Encryption.Encrypt(original);
         String Dec = Encryption.Decrypt(Enc);
 
@@ -50,12 +53,12 @@ public class ExampleInstrumentedTest {
         Http http = new Http(Constants.getPostUrl("check"), new Http.IHTTPResult() {
             @Override
             public void OnStarted() {
-                Log.d("testoftest", "OnStarted: ");
+                Log.d("http 1", "OnStarted: ");
             }
 
             @Override
             public void OnSuccess(String Result) {
-                Log.d("testoftest", "OnSuccess: " + Result);
+                Log.d("http 1", "OnSuccess: " + Result);
             }
 
             @Override
@@ -70,7 +73,7 @@ public class ExampleInstrumentedTest {
 
             @Override
             public void OnFailed(String message) {
-
+                Log.d("http 1", "OnFailed: " + message);
             }
         });
 
@@ -80,6 +83,16 @@ public class ExampleInstrumentedTest {
         params.put("test","data3");
 
         http.BufferedPost(params);
+
+    }
+
+
+    @Test
+    void SplitHelper() {
+        String input = "this is a long splittable text that is ";
+       List<String> parts =  StringSplitHelpera.SplitString(input , 10);
+        Log.d("asdasd", "SplitHelper: "  + parts.stream().collect(Collectors.joining("")));
+       assertEquals(parts.stream().collect(Collectors.joining("")), input );
 
     }
 }

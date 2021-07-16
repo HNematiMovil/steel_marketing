@@ -103,5 +103,13 @@ public class CallsListView extends AppCompatActivity implements ICallsListView {
     @Override
     public void SyncUpdated(int childIndex) {
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rvCalls.getChildAt(0).setBackgroundColor(getColor(R.color.amber_100));
+                Toast.makeText(CallsListView.this,   " ردیف " + (childIndex+1) + " ذخیره شد ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.hadinemati.steelmarketing.Lib.ConnectionHelper;
 import ir.hadinemati.steelmarketing.Lib.CurrencyTextWatcher;
 import ir.hadinemati.steelmarketing.Models.Entity.ProductPriceDO;
 import ir.hadinemati.steelmarketing.Presenters.Interfaces.INewSellPresenter;
@@ -53,6 +55,13 @@ public class NewSellView extends AppCompatActivity implements ISellView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sell);
+
+
+        if(!ConnectionHelper.isConnected(getApplicationContext())){
+            Toast.makeText(this, "لطفا ابتدا به اینترنت وصل شوید", Toast.LENGTH_LONG).show();
+            this.finish();
+        }
+
 
         sellPresenter = new NewSellPresenter(this, getApplicationContext());
         sellPresenter.getProductsList();
@@ -104,6 +113,12 @@ public class NewSellView extends AppCompatActivity implements ISellView {
                 productPriceDOS.add(new ProductPriceDO("", 0, 0, 1));
 
                 View v = inflater.inflate(R.layout.item_new_product_price, null);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                lp.setMargins(0,10,0,10);
+                v.setLayoutParams(lp);
                 v.findViewById(R.id.ibSearch).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -185,6 +200,8 @@ public class NewSellView extends AppCompatActivity implements ISellView {
         btnAddOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dgw = new DialogWait(NewSellView.this);
+                dgw.show();
                 sellPresenter.addNewSell(etCustomerPhoneNumber.getText().toString(),Gender,etCustomerName.getText().toString(),productPriceDOS,etDateTime.getText().toString());
             }
         });
@@ -204,8 +221,13 @@ public class NewSellView extends AppCompatActivity implements ISellView {
 
     @Override
     public void WaitToSync() {
-        dgw = new DialogWait(this);
-        dgw.show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
     }
 
     @Override

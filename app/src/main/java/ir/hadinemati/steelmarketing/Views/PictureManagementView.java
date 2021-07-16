@@ -187,7 +187,15 @@ public class PictureManagementView extends AppCompatActivity implements IPicture
         this.ProductList = products;
     }
 
-
+    @Override
+    public void OnError(String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(PictureManagementView.this, "" + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }
